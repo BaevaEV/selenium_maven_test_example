@@ -40,9 +40,7 @@ public class Homework1Test {
   public void homework1() {
     driver.get("http://172.24.120.5:8081/login");
     driver.manage().window().setSize(new Dimension(1552, 840));
-    driver.findElement(By.id("login-input")).click();
     driver.findElement(By.id("login-input")).sendKeys("BAEVA");
-    driver.findElement(By.id("password-input")).click();
     driver.findElement(By.id("password-input")).sendKeys("Start123");
     driver.findElement(By.id("form_auth_button")).click();
   }
