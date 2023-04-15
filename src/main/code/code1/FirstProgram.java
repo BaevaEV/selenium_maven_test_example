@@ -1,9 +1,9 @@
 package code.code1;
-import code.code2.TwoClass;
+import static code.code2.TwoClass.say;
 
 public class FirstProgram {
     public static void main(String[] args) {
         System.out.println("Любой текст");
-        TwoClass two = new TwoClass();
+        System.out.println(say());
     }
 }
