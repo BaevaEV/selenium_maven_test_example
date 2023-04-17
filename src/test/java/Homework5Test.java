@@ -50,8 +50,7 @@ public class Homework5Test {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-input")).sendKeys("BAEVA");
         driver.findElement(By.id("password-input")).sendKeys("Start123");
-        driver.findElement(By.id("form_auth_button")).click();;
-        driver.findElement(By.xpath("//div[contains(text(),'Весна, весна! Как воздух чист!')]")).click();
+        driver.findElement(By.id("form_auth_button")).click();
         String contentText = driver.findElement(By.xpath("//div[@class='Card_body__35O4X']")).getText();
         Assertions.assertEquals("Весна, весна! Как воздух чист!",contentText, "Верный текст заметки");
     }
