@@ -8,7 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.jupiter.api.Assertions;
 
+
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
@@ -16,24 +18,25 @@ import java.time.Duration;
 public class Homework5Test {
     WebDriver driver;
 
+
     @BeforeEach
     public void initDriver() {
         driver = new ChromeDriver();
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Order(1)
     @Test
     @DisplayName(value = "Note title")
     public void assert1Test() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("http://172.24.120.5:8081/login");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-input")).sendKeys("BAEVA");
         driver.findElement(By.id("password-input")).sendKeys("Start123");
         driver.findElement(By.id("form_auth_button")).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='Card_containerNew__adAai']"))).click();
+        driver.findElement(By.xpath("//div[@class='Card_containerNew__adAai']")).click();
         driver.findElement(By.id("note-modal-title-new_empty")).sendKeys("О весне");
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'Содержание')]"))).click();
+        driver.findElement(By.xpath("//div[contains(text(),'Содержание')]")).click();
         driver.findElement(By.id("note-modal-content-new_empty")).sendKeys("Весна, весна! Как воздух чист!");
         driver.findElement(By.id("palette-btn-new_empty")).click();
         driver.findElement(By.id("palette-color-#fff475")).click();

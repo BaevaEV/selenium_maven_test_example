@@ -16,6 +16,7 @@ public class Homework4Test {
     @BeforeEach
     public void initDriver() {
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Order(1)
@@ -35,7 +36,6 @@ public class Homework4Test {
     @DisplayName(value = "Неявное")
     public void waiting2Test() {
         driver.get("http://172.24.120.5:8081/login");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-input")).sendKeys("BAEVA");
         driver.findElement(By.id("password-input")).sendKeys("Start123");
         driver.findElement(By.id("form_auth_button")).click();
