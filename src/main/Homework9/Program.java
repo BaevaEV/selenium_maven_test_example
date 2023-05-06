@@ -10,7 +10,7 @@ public class Program{
         Pet Sharik = new Pet("Собака", "Шарик");
         Sharik.displayInfo();
 
-        Pet Murzik = new Pet("Кошка", 5.5);
+        Pet Murzik = new Pet("Мурзик");
         Murzik.displayInfo();
     }
 }

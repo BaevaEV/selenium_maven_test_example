@@ -8,28 +8,27 @@ public class Pet {
 
     Pet()
     {
-        type = "Собака";
-        name = "Дружок";
-        age = 3;
-        weight = 5.2;
+        this("Собака", "Дружок");
+        this.age = 5;
+        this.weight = 10;
     }
 
     Pet(String t, String n)
     {
-        type = t;
-        name = n;
-        age = 8;
+        this.type = t;
+        this.name = n;
+        this.age = 8;
+        this.weight = 5.2;
     }
 
-    Pet(String t, double w)
+    Pet(String n)
     {
-        type = t;
-        age = 2;
-        weight = 1.5;
-        this.name = "Мурзик";
+        this("Кошка", "Мурзик");
+        this.age = 9;
+        this.weight = 6.0;
     }
 
-    void displayInfo(){
+    void displayInfo() {
         System.out.printf("My pet: %s %s \tAge: %d \tWeight: %.2f\n", type, name, age, weight);
     }
 }
