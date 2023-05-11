@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,24 @@ import java.util.concurrent.TimeUnit;
 public class Homework15Test {
     WebDriver driver;
 
+    public void executeQuery(String sql) {
+        try {
+            String url = "jdbc:postgresql://172.24.120.5:5432/postgres";
+            String login = "root";
+            String password = "root";
+            Connection connection = DriverManager.getConnection(url, login, password);
+            try {
+                Statement statement = connection.createStatement();
+                statement.executeUpdate(sql);
+                statement.close();
+            } finally {
+                connection.close();
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @BeforeEach
     public void initDriver() {
@@ -22,9 +41,10 @@ public class Homework15Test {
         driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         int NumberGenerated = 100 + (int) (Math.random() *3000);
-        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date(1212121212121L);
-        executeQuery("INSERT INTO nfaut.notes (id,user_id,name,color,content,priority,created,archive_flg) VALUES ("+ NumberGenerated +" ,115,'Инсерт','#fff475','Автотестом',1,'"+ formater.format(date)+"',false)");
+        LocalDateTime datetime = LocalDateTime.now();
+//        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = new Date(1212121212121L);
+        executeQuery("INSERT INTO nfaut.notes (id,user_id,name,color,content,priority,created,archive_flg) VALUES ("+ NumberGenerated +" ,115,'Инсерт','#fff475','Автотестом',1,'"+ datetime+"',false)");
     }
 
     @Test
@@ -43,24 +63,7 @@ public class Homework15Test {
     }
 
 
-    public void executeQuery(String sql) {
-        try {
-            String url = "jdbc:postgresql://172.24.120.5:5432/postgres";
-            String login = "root";
-            String password = "root";
-            Connection connection = DriverManager.getConnection(url, login, password);
-            try {
-                Statement statement = connection.createStatement();
-                statement.executeUpdate(sql);
-                statement.close();
-            } finally {
-                connection.close();
-            }
-        }
-        catch(Exception e) {
-        e.printStackTrace();
-    }
-    }
+
 
     @AfterEach
     public void closeDriver() {
